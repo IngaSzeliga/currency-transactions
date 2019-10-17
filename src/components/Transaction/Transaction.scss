@@ -1,0 +1,38 @@
+@import "../../config/style.scss";
+@import "../../config/sizes.scss";
+
+.transaction-container {
+  display: flex;
+  margin: 20px 0;
+  .transaction-container-title {
+    margin: 0 20px;
+    font-weight: 600;
+    @media only screen and (max-width: $phone) {
+      margin: 0 10px;
+      font-size: 14px;
+    }
+  }
+  .transaction-container-amounts {
+    .transaction-container-amounts-amount {
+      font-size: 18px;
+      @media only screen and (max-width: $phone) {
+        font-size: 15px;
+      }
+    }
+    .transaction-container-amounts-converted-amount {
+      margin-top: 5px;
+      color: $light-gray;
+      font-size: 13px;
+      text-align: center;
+      @media only screen and (max-width: $phone) {
+        font-size: 10px;
+      }
+    }
+  }
+  .transaction-container-delete-button {
+    margin-left: 30px;
+    @media only screen and (max-width: $phone) {
+      margin-left: 10px;
+    }
+  }
+}

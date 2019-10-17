@@ -1,8 +1,10 @@
+@import "../../config/sizes.scss";
+
 .new-transaction-container {
   display: flex;
   flex-direction: column;
   padding: 40px;
-  @media only screen and (min-width: 768px) {
+  @media only screen and (min-width: $tablet) {
     width: 80%;
   }
 
