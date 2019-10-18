@@ -1,13 +1,15 @@
 import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
+import uuidv4 from "uuid/v4";
 import { Paper, TextField, Button } from "@material-ui/core";
 import "./NewTransaction.scss";
 
 class NewTransaction extends PureComponent {
   state = {
     transactionName: "",
-    amount: 0,
-    rate: 0,
-    calculatedAmount: 0
+    amount: "",
+    rate: "",
+    calculatedAmount: ""
   };
 
   calculateAmount = (amount, rate) => amount * rate;
@@ -18,20 +20,37 @@ class NewTransaction extends PureComponent {
 
   handleChangeRate = event => {
     const { amount } = this.state;
-    const rate = event.target.value;
+    const rate = Number(event.target.value);
     const calculatedAmount = this.calculateAmount(amount, rate);
     this.setState({ rate, calculatedAmount });
   };
 
   handleChangeAmount = event => {
     const { rate } = this.state;
-    const amount = event.target.value;
+    const amount = Number(event.target.value);
     const calculatedAmount = this.calculateAmount(amount, rate);
     this.setState({ amount, calculatedAmount });
   };
 
+  handleSubmit = () => {
+    const { addTransaction } = this.props;
+    const { transactionName, amount, calculatedAmount } = this.state;
+    addTransaction({
+      id: uuidv4(),
+      title: transactionName,
+      amount: amount,
+      convertedAmount: calculatedAmount
+    });
+    this.setState({
+      transactionName: "",
+      amount: "",
+      rate: "",
+      calculatedAmount: ""
+    });
+  };
+
   render() {
-    const { calculatedAmount } = this.state;
+    const { transactionName, amount, rate, calculatedAmount } = this.state;
     return (
       <Paper className="new-transaction-container">
         <TextField
@@ -39,6 +58,7 @@ class NewTransaction extends PureComponent {
           onChange={this.handleTransactionName}
           type="text"
           margin="normal"
+          value={transactionName}
         />
         <div className="new-transaction-currency-rate">
           1EUR =
@@ -47,6 +67,7 @@ class NewTransaction extends PureComponent {
             onChange={this.handleChangeRate}
             type="number"
             margin="normal"
+            value={rate}
           />
           PLN
         </div>
@@ -55,6 +76,7 @@ class NewTransaction extends PureComponent {
           onChange={this.handleChangeAmount}
           type="number"
           margin="normal"
+          value={amount}
         />
         <div>Amount in PLN: {calculatedAmount}</div>
         <div className="new-transaction-button-container">
@@ -62,6 +84,7 @@ class NewTransaction extends PureComponent {
             className="new-transaction-button"
             variant="contained"
             color="primary"
+            onClick={this.handleSubmit}
           >
             Submit
           </Button>
@@ -71,6 +94,8 @@ class NewTransaction extends PureComponent {
   }
 }
 
-NewTransaction.propTypes = {};
+NewTransaction.propTypes = {
+  addTransaction: PropTypes.func.isRequired
+};
 
 export default NewTransaction;
