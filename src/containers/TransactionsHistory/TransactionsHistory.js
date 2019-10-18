@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import Transaction from "../../components/Transaction";
 
 const TransactionsHistory = props => {
-  const { transactions } = props;
+  const { transactions, deleteTransaction } = props;
   return (
     <div className="transactions-history-container">
       {transactions.map(transaction => {
@@ -11,9 +11,11 @@ const TransactionsHistory = props => {
         return (
           <Transaction
             key={id}
+            id={id}
             title={title}
             amount={amount}
             convertedAmount={convertedAmount}
+            deleteTransaction={deleteTransaction}
           />
         );
       })}
@@ -22,7 +24,8 @@ const TransactionsHistory = props => {
 };
 
 TransactionsHistory.propTypes = {
-  transactions: PropTypes.array.isRequired
+  transactions: PropTypes.array.isRequired,
+  deleteTransaction: PropTypes.func.isRequired
 };
 
 export default React.memo(TransactionsHistory);

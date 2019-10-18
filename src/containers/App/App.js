@@ -9,10 +9,22 @@ class App extends PureComponent {
   };
 
   addTransaction = transaction => {
-    this.setState(previousState => {
-      const { transactions } = previousState;
+    this.setState(state => {
+      const { transactions } = state;
       return {
         transactions: [...transactions, transaction]
+      };
+    });
+  };
+
+  deleteTransaction = id => {
+    this.setState(state => {
+      const { transactions } = state;
+      const transactionsAfterDeleting = transactions.filter(
+        transaction => transaction.id !== id
+      );
+      return {
+        transactions: transactionsAfterDeleting
       };
     });
   };
@@ -22,7 +34,10 @@ class App extends PureComponent {
     return (
       <div className="app-container">
         <NewTransaction addTransaction={this.addTransaction} />
-        <TransactionsHistory transactions={transactions} />
+        <TransactionsHistory
+          transactions={transactions}
+          deleteTransaction={this.deleteTransaction}
+        />
       </div>
     );
   }

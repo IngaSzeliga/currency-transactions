@@ -7,7 +7,7 @@ import { countryRegion } from "../../config";
 import "./Transaction.scss";
 
 const Transaction = props => {
-  const { title, amount, convertedAmount } = props;
+  const { id, title, amount, convertedAmount, deleteTransaction } = props;
   const amountFormatted = amount.toLocaleString(countryRegion, {
     style: "currency",
     currency: "EUR"
@@ -38,6 +38,7 @@ const Transaction = props => {
         aria-label="delete"
         size="small"
         className="transaction-container-delete-button"
+        onClick={() => deleteTransaction(id)}
       >
         <DeleteIcon />
       </Fab>
@@ -46,9 +47,11 @@ const Transaction = props => {
 };
 
 Transaction.propTypes = {
+  id: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   amount: PropTypes.number.isRequired,
-  convertedAmount: PropTypes.number.isRequired
+  convertedAmount: PropTypes.number.isRequired,
+  deleteTransaction: PropTypes.func.isRequired
 };
 
 export default React.memo(Transaction);
