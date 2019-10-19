@@ -2,6 +2,7 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import uuidv4 from "uuid/v4";
 import { Paper, TextField, Button } from "@material-ui/core";
+import { E_KEYCODE } from "../../config";
 import "./NewTransaction.scss";
 
 class NewTransaction extends PureComponent {
@@ -23,6 +24,12 @@ class NewTransaction extends PureComponent {
     const rate = Number(event.target.value);
     const calculatedAmount = this.calculateAmount(amount, rate);
     this.setState({ rate, calculatedAmount });
+  };
+
+  handleKeyDownRate = event => {
+    if (event.keyCode === E_KEYCODE) {
+      event.preventDefault();
+    }
   };
 
   handleChangeAmount = event => {
@@ -65,9 +72,11 @@ class NewTransaction extends PureComponent {
           <TextField
             className="new-transaction-currency-rate-input"
             onChange={this.handleChangeRate}
+            onKeyDown={this.handleKeyDownRate}
             type="number"
             margin="normal"
             value={rate}
+            InputProps={{ inputProps: { min: 0 } }}
           />
           PLN
         </div>
