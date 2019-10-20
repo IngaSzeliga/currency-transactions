@@ -5,6 +5,7 @@ import axios from "axios";
 import { Paper, TextField, Button } from "@material-ui/core";
 import ErrorSnackbar from "../ErrorSnackbar";
 import {
+  countryRegion,
   E_KEY,
   PLUS_KEY,
   MINUS_KEY,
@@ -28,7 +29,11 @@ class NewTransaction extends PureComponent {
     rateFetchingError: ""
   };
 
-  calculateAmount = (amount, rate) => amount * rate;
+  calculateAmount = (amount, rate) =>
+    Number(amount * rate).toLocaleString(countryRegion, {
+      style: "currency",
+      currency: PLN_NAME
+    });
 
   handleTransactionName = event => {
     this.setState({ transactionName: event.target.value });

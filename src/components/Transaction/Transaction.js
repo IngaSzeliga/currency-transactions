@@ -3,20 +3,20 @@ import PropTypes from "prop-types";
 import Fab from "@material-ui/core/Fab";
 import CachedIcon from "@material-ui/icons/Cached";
 import DeleteIcon from "@material-ui/icons/Delete";
-import { countryRegion } from "../../config";
+import { countryRegion, EUR_NAME, PLN_NAME } from "../../config";
 import "./Transaction.scss";
 
 const Transaction = props => {
   const { id, title, amount, convertedAmount, deleteTransaction } = props;
   const amountFormatted = amount.toLocaleString(countryRegion, {
     style: "currency",
-    currency: "EUR"
+    currency: EUR_NAME
   });
   const convertedAmountFormatted = convertedAmount.toLocaleString(
     countryRegion,
     {
       style: "currency",
-      currency: "PLN"
+      currency: PLN_NAME
     }
   );
   return (
