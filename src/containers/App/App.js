@@ -1,4 +1,5 @@
 import React, { PureComponent } from "react";
+import Header from "../../components/Header";
 import NewTransaction from "../../components/NewTransaction";
 import TransactionsHistory from "../../containers/TransactionsHistory";
 import "./App.scss";
@@ -33,6 +34,7 @@ class App extends PureComponent {
     const { transactions } = this.state;
     return (
       <div className="app-container">
+        <Header />
         <NewTransaction addTransaction={this.addTransaction} />
         <TransactionsHistory
           transactions={transactions}

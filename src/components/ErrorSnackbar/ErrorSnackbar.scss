@@ -1,6 +1,8 @@
+@import "../../config/style.scss";
+
 .error-snackbar-container {
   > div:first-child {
-    background-color: #d32f2f;
+    background-color: $dark-red;
     display: flex;
   }
   .error-snackbar-content {

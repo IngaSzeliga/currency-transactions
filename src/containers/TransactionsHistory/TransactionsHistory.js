@@ -7,6 +7,10 @@ const TransactionsHistory = props => {
   const { transactions, deleteTransaction } = props;
   return (
     <div className="transactions-history-container">
+      <h2 className="transactions-history-container-title">
+        Transaction History:
+      </h2>
+      {transactions.length === 0 ? "No transaction yet" : null}
       {transactions.map(transaction => {
         const { id, title, amount, convertedAmount } = transaction;
         return (

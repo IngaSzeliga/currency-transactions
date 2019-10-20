@@ -1,0 +1,10 @@
+@import "../../config/style.scss";
+@import "../../config/sizes.scss";
+
+.header-container {
+  font-size: 40px;
+  color: $light-black;
+  @media only screen and (max-width: $tablet) {
+    font-size: 25px;
+  }
+}
