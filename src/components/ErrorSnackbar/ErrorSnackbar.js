@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import ErrorIcon from "@material-ui/icons/Error";
 import CloseIcon from "@material-ui/icons/Close";
 import IconButton from "@material-ui/core/IconButton";
@@ -43,6 +44,11 @@ const ErrorSnackbar = props => {
       />
     </Snackbar>
   );
+};
+
+ErrorSnackbar.propTypes = {
+  error: PropTypes.string.isRequired,
+  handleCloseError: PropTypes.func.isRequired
 };
 
 export default React.memo(ErrorSnackbar);

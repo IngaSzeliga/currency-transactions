@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ErrorSnackbar component expects component to never be changed 1`] = `
+<WithStyles(ForwardRef(Snackbar))
+  anchorOrigin={
+    Object {
+      "horizontal": "left",
+      "vertical": "bottom",
+    }
+  }
+  autoHideDuration={6000}
+  className="error-snackbar-container"
+  onClose={[MockFunction]}
+  open={true}
+>
+  <WithStyles(ForwardRef(SnackbarContent))
+    action={
+      Array [
+        <ForwardRef(WithStyles)
+          aria-label="close"
+          className="error-icon"
+          color="inherit"
+          onClick={[MockFunction]}
+        >
+          <Memo(CloseIcon) />
+        </ForwardRef(WithStyles)>,
+      ]
+    }
+    aria-describedby="client-snackbar"
+    className="error-snackbar-content"
+    message={
+      <span
+        className="error-message"
+        id="client-snackbar"
+      >
+        <Memo(ErrorIcon) />
+        Some error!
+      </span>
+    }
+  />
+</WithStyles(ForwardRef(Snackbar))>
+`;
