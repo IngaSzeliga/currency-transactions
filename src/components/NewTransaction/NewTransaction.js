@@ -121,7 +121,11 @@ class NewTransaction extends PureComponent {
         transactionName: "",
         amount: "",
         rate: "",
-        calculatedAmount: ""
+        calculatedAmount: "",
+        transactionNameError: "",
+        amountError: "",
+        rateError: "",
+        rateFetchingError: ""
       });
     }
   };
