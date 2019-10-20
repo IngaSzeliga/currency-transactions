@@ -7,23 +7,38 @@ import "./TransactionsHistory.scss";
 const TransactionsHistory = props => {
   const { transactions, deleteTransaction } = props;
   let totalTransaction = 0;
+  const biggestTransaction = {
+    convertedAmount: 0,
+    title: ""
+  };
   for (var i = 0; i < transactions.length; i++) {
     totalTransaction = totalTransaction + transactions[i].convertedAmount;
+    if (biggestTransaction.convertedAmount < transactions[i].convertedAmount) {
+      biggestTransaction.convertedAmount = transactions[i].convertedAmount;
+      biggestTransaction.title = transactions[i].title;
+    }
   }
   return (
     <div className="transactions-history-container">
       <h2 className="transactions-history-container-title">
         Transaction History:
       </h2>
-      {transactions.length === 0
-        ? "No transaction yet"
-        : `Sum of transactions: ${totalTransaction.toLocaleString(
-            countryRegion,
-            {
+      {transactions.length === 0 ? (
+        "No transaction yet"
+      ) : (
+        <div className="transactions-history-container-information">
+          <div className="transactions-history-container-information-sum">
+            Sum of transactions:&nbsp;
+            {totalTransaction.toLocaleString(countryRegion, {
               style: "currency",
               currency: PLN_NAME
-            }
-          )}`}
+            })}
+          </div>
+          <div className="transactions-history-container-information-biggest">
+            The biggest transaction is {biggestTransaction.title}
+          </div>
+        </div>
+      )}
       {transactions.map(transaction => {
         const { id, title, amount, convertedAmount } = transaction;
         return (

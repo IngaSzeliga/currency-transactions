@@ -1,11 +1,20 @@
 @import "../../config/style.scss";
 @import "../../config/sizes.scss";
+@import "../../config/mixins.scss";
 
 .transactions-history-container {
   padding: 40px;
   width: 90%;
   @media only screen and (min-width: $desktop) {
     width: 40%;
+  }
+  .transactions-history-container-information {
+    .transactions-history-container-information-sum {
+      @include shorten-text;
+    }
+    .transactions-history-container-information-biggest {
+      @include shorten-text;
+    }
   }
   .transactions-history-container-title {
     color: $light-black;

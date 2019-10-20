@@ -9,7 +9,21 @@ exports[`TransactionsHistory component expects component to never be changed 1`]
   >
     Transaction History:
   </h2>
-  Sum of transactions: 054,99 zł
+  <div
+    className="transactions-history-container-information"
+  >
+    <div
+      className="transactions-history-container-information-sum"
+    >
+      Sum of transactions: 
+      054,99 zł
+    </div>
+    <div
+      className="transactions-history-container-information-biggest"
+    >
+      The biggest transaction is 
+    </div>
+  </div>
   <Memo(Transaction)
     amount={13}
     convertedAmount="54,99 zł"
