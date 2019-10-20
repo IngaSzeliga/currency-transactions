@@ -67,10 +67,8 @@ class NewTransaction extends PureComponent {
   };
 
   handleFetchRate = () => {
-    const request = axios.get(
-      `${exchangeRateApiUrl}/latest?base=${EUR_NAME}&symbols=${PLN_NAME}`
-    );
-    request
+    axios
+      .get(`${exchangeRateApiUrl}/latest?base=${EUR_NAME}&symbols=${PLN_NAME}`)
       .then(({ data }) => {
         const { rates } = data;
         const { PLN: rate } = rates;
@@ -146,72 +144,74 @@ class NewTransaction extends PureComponent {
       rateFetchingError
     } = this.state;
     return (
-      <Paper className="new-transaction-container">
-        <TextField
-          label="Transaction Name"
-          onChange={this.handleTransactionName}
-          type="text"
-          margin="normal"
-          value={transactionName}
-          error={transactionNameError !== ""}
-          helperText={transactionNameError}
-        />
-        <div className="new-transaction-currency-rate">
-          <div className="new-transaction-currency-rate-input-container">
-            1EUR =
-            <TextField
-              className="new-transaction-currency-rate-input"
-              onChange={this.handleChangeRate}
-              onKeyDown={this.handleKeyDownNumber}
-              type="number"
-              margin="normal"
-              value={rate}
-              InputProps={{ inputProps: { min: 0 } }}
-              error={rateError !== ""}
-              helperText={rateError}
-            />
-            PLN
-          </div>
-          <Button
-            className="rate-button"
-            variant="outlined"
-            color="primary"
-            size="small"
-            onClick={this.handleFetchRate}
-          >
-            Get current rate
-          </Button>
-        </div>
-        <TextField
-          label="Amount in Euro"
-          onChange={this.handleChangeAmount}
-          onKeyDown={this.handleKeyDownNumber}
-          type="number"
-          margin="normal"
-          value={amount}
-          error={amountError !== ""}
-          helperText={amountError}
-        />
-        <div className="new-transaction-exchange-amount-container">
-          Amount in PLN: {calculatedAmount}
-        </div>
-        <div className="new-transaction-button-container">
-          <Button
-            className="new-transaction-button"
-            variant="contained"
-            color="primary"
-            onClick={this.handleSubmit}
-          >
-            Submit
-          </Button>
-        </div>
-        {rateFetchingError !== "" ? (
-          <ErrorSnackbar
-            handleCloseError={this.handleCloseErrorSnackBar}
-            error={rateFetchingError}
+      <div className="new-transaction-container">
+        <Paper className="new-transaction-container-paper">
+          <TextField
+            label="Transaction Name"
+            onChange={this.handleTransactionName}
+            type="text"
+            margin="normal"
+            value={transactionName}
+            error={transactionNameError !== ""}
+            helperText={transactionNameError}
           />
-        ) : null}
-      </Paper>
+          <div className="new-transaction-currency-rate">
+            <div className="new-transaction-currency-rate-input-container">
+              1EUR =
+              <TextField
+                className="new-transaction-currency-rate-input"
+                onChange={this.handleChangeRate}
+                onKeyDown={this.handleKeyDownNumber}
+                type="number"
+                margin="normal"
+                value={rate}
+                InputProps={{ inputProps: { min: 0 } }}
+                error={rateError !== ""}
+                helperText={rateError}
+              />
+              &nbsp;PLN
+            </div>
+            <Button
+              className="rate-button"
+              variant="outlined"
+              color="primary"
+              size="small"
+              onClick={this.handleFetchRate}
+            >
+              Get current rate
+            </Button>
+          </div>
+          <TextField
+            label="Amount in Euro"
+            onChange={this.handleChangeAmount}
+            onKeyDown={this.handleKeyDownNumber}
+            type="number"
+            margin="normal"
+            value={amount}
+            error={amountError !== ""}
+            helperText={amountError}
+          />
+          <div className="new-transaction-exchange-amount-container">
+            Amount in PLN: {calculatedAmount}
+          </div>
+          <div className="new-transaction-button-container">
+            <Button
+              className="new-transaction-button"
+              variant="contained"
+              color="primary"
+              onClick={this.handleSubmit}
+            >
+              Submit
+            </Button>
+          </div>
+          {rateFetchingError !== "" ? (
+            <ErrorSnackbar
+              handleCloseError={this.handleCloseErrorSnackBar}
+              error={rateFetchingError}
+            />
+          ) : null}
+        </Paper>
+      </div>
     );
   }
 }

@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Transaction from "../../components/Transaction";
+import "./TransactionsHistory.scss";
 
 const TransactionsHistory = props => {
   const { transactions, deleteTransaction } = props;

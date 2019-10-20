@@ -1,42 +1,49 @@
 @import "../../config/sizes.scss";
+@import "../../config/mixins.scss";
 
 .new-transaction-container {
-  display: flex;
-  flex-direction: column;
-  padding: 40px;
-  @media only screen and (min-width: $tablet) {
+  width: 90%;
+  @media only screen and (min-width: $desktop) {
     width: 40%;
   }
-
-  .new-transaction-currency-rate {
+  .new-transaction-container-paper {
     display: flex;
-    align-items: baseline;
-    @media only screen and (max-width: $phone) {
-      flex-direction: column;
-      align-items: center;
-    }
-    .new-transaction-currency-rate-input-container {
+    flex-direction: column;
+    padding: 40px;
+    .new-transaction-currency-rate {
       display: flex;
       align-items: baseline;
-      .new-transaction-currency-rate-input {
+      @media only screen and (max-width: $tablet) {
+        flex-direction: column;
+        align-items: center;
+      }
+      .new-transaction-currency-rate-input-container {
+        display: flex;
+        align-items: baseline;
+        @media only screen and (max-width: $phone) {
+          font-size: 14px;
+        }
+        .new-transaction-currency-rate-input {
+          margin-left: 10px;
+        }
+      }
+      .rate-button {
         margin-left: 10px;
       }
     }
-    .rate-button {
-      margin-left: 10px;
+    .new-transaction-exchange-amount-container {
+      @media only screen and (max-width: $phone) {
+        max-width: calc(100vw - 130px);
+      }
+      @include shorten-text;
     }
-  }
-  .new-transaction-exchange-amount-container {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-  .new-transaction-button-container {
-    display: flex;
-    justify-content: center;
-    .new-transaction-button {
-      margin-top: 50px;
-      width: 150px;
+    .new-transaction-button-container {
+      display: flex;
+      justify-content: center;
+      .new-transaction-button {
+        margin-top: 50px;
+        width: 150px;
+      }
     }
   }
 }

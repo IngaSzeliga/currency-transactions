@@ -1,19 +1,39 @@
 @import "../../config/style.scss";
 @import "../../config/sizes.scss";
+@import "../../config/mixins.scss";
 
 .transaction-container {
   display: flex;
-  margin: 20px 0;
+  justify-content: space-between;
+  margin-top: 20px;
+  padding: 40px;
+  @media only screen and (max-width: $phone) {
+    width: auto;
+    margin-left: 0;
+    padding: 20px;
+  }
   .transaction-container-title {
     margin: 0 20px;
     font-weight: 600;
+    // transaction icon (35px) + button delete with margin (70px) = 105px
+    // transaction-container-title margin = 40px
+    width: calc((100% - 105px) / 2 - 40px);
+    @include shorten-text;
     @media only screen and (max-width: $phone) {
       margin: 0 10px;
       font-size: 14px;
+      width: calc((100% - 85px) / 2 - 20px);
     }
   }
   .transaction-container-amounts {
+    // transaction icon (35px) + button delete with margin (70px) = 105px
+    width: calc((100% - 105px) / 2);
+    @media only screen and (max-width: $phone) {
+      width: calc((100% - 85px) / 2);
+    }
     .transaction-container-amounts-amount {
+      text-align: right;
+      @include shorten-text;
       font-size: 18px;
       @media only screen and (max-width: $phone) {
         font-size: 15px;
@@ -23,7 +43,8 @@
       margin-top: 5px;
       color: $light-gray;
       font-size: 13px;
-      text-align: center;
+      text-align: right;
+      @include shorten-text;
       @media only screen and (max-width: $phone) {
         font-size: 10px;
       }
