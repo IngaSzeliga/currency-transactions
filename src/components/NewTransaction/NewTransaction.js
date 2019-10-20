@@ -5,7 +5,9 @@ import axios from "axios";
 import { Paper, TextField, Button } from "@material-ui/core";
 import ErrorSnackbar from "../ErrorSnackbar";
 import {
-  E_KEYCODE,
+  E_KEY,
+  PLUS_KEY,
+  MINUS_KEY,
   errorMessageInput,
   errorMessageFetching,
   exchangeRateApiUrl,
@@ -42,8 +44,9 @@ class NewTransaction extends PureComponent {
     this.setState({ rate, calculatedAmount });
   };
 
-  handleKeyDownRate = event => {
-    if (event.keyCode === E_KEYCODE) {
+  handleKeyDownNumber = event => {
+    const { key } = event;
+    if (key === E_KEY || key === PLUS_KEY || key === MINUS_KEY) {
       event.preventDefault();
     }
   };
@@ -150,7 +153,7 @@ class NewTransaction extends PureComponent {
             <TextField
               className="new-transaction-currency-rate-input"
               onChange={this.handleChangeRate}
-              onKeyDown={this.handleKeyDownRate}
+              onKeyDown={this.handleKeyDownNumber}
               type="number"
               margin="normal"
               value={rate}
@@ -173,6 +176,7 @@ class NewTransaction extends PureComponent {
         <TextField
           label="Amount in Euro"
           onChange={this.handleChangeAmount}
+          onKeyDown={this.handleKeyDownNumber}
           type="number"
           margin="normal"
           value={amount}

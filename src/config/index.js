@@ -1,8 +1,10 @@
 // Country Region
 export const countryRegion = "pl-PL";
 
-// Keyboard key codes
-export const E_KEYCODE = 69;
+// Keyboard keys
+export const E_KEY = "e";
+export const PLUS_KEY = "+";
+export const MINUS_KEY = "-";
 
 // Error messages
 export const errorMessageInput = "This field cannot be empty";
