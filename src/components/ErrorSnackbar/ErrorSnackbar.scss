@@ -1,0 +1,19 @@
+.error-snackbar-container {
+  > div:first-child {
+    background-color: #d32f2f;
+    display: flex;
+  }
+  .error-snackbar-content {
+    display: inline-block;
+
+    .error-message {
+      justify-content: center;
+      display: flex;
+      align-items: center;
+
+      > svg:first-child {
+        margin-right: 10px;
+      }
+    }
+  }
+}

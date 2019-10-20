@@ -11,7 +11,18 @@
   .new-transaction-currency-rate {
     display: flex;
     align-items: baseline;
-    .new-transaction-currency-rate-input {
+    @media only screen and (max-width: $phone) {
+      flex-direction: column;
+      align-items: center;
+    }
+    .new-transaction-currency-rate-input-container {
+      display: flex;
+      align-items: baseline;
+      .new-transaction-currency-rate-input {
+        margin-left: 10px;
+      }
+    }
+    .rate-button {
       margin-left: 10px;
     }
   }

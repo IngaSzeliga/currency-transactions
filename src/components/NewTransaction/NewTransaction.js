@@ -1,8 +1,17 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import uuidv4 from "uuid/v4";
+import axios from "axios";
 import { Paper, TextField, Button } from "@material-ui/core";
-import { E_KEYCODE, errorMessage } from "../../config";
+import ErrorSnackbar from "../ErrorSnackbar";
+import {
+  E_KEYCODE,
+  errorMessageInput,
+  errorMessageFetching,
+  exchangeRateApiUrl,
+  EUR_NAME,
+  PLN_NAME
+} from "../../config";
 import "./NewTransaction.scss";
 
 class NewTransaction extends PureComponent {
@@ -13,7 +22,8 @@ class NewTransaction extends PureComponent {
     calculatedAmount: "",
     transactionNameError: "",
     amountError: "",
-    rateError: ""
+    rateError: "",
+    rateFetchingError: ""
   };
 
   calculateAmount = (amount, rate) => amount * rate;
@@ -42,6 +52,22 @@ class NewTransaction extends PureComponent {
     this.setState({ amount, calculatedAmount });
   };
 
+  handleFetchRate = () => {
+    const request = axios.get(
+      `${exchangeRateApiUrl}/latest?base=${EUR_NAME}&symbols=${PLN_NAME}`
+    );
+    request
+      .then(({ data }) => {
+        const { rates } = data;
+        const { PLN: rate } = rates;
+        this.setState({ rate });
+      })
+      .catch(error => {
+        this.setState({ rateFetchingError: errorMessageFetching });
+        console.error(error);
+      });
+  };
+
   handleSubmit = () => {
     const { transactionName, amount, calculatedAmount, rate } = this.state;
     const stateError = {
@@ -51,15 +77,15 @@ class NewTransaction extends PureComponent {
     };
     let hasError = false;
     if (transactionName === "") {
-      stateError.transactionNameError = errorMessage;
+      stateError.transactionNameError = errorMessageInput;
       hasError = true;
     }
     if (amount === "") {
-      stateError.amountError = errorMessage;
+      stateError.amountError = errorMessageInput;
       hasError = true;
     }
     if (rate === "") {
-      stateError.rateError = errorMessage;
+      stateError.rateError = errorMessageInput;
       hasError = true;
     }
     if (hasError) {
@@ -81,9 +107,21 @@ class NewTransaction extends PureComponent {
     }
   };
 
+  handleCloseErrorSnackBar = () => {
+    this.setState({ rateFetchingError: "" });
+  };
+
   render() {
-    const { transactionName, amount, rate, calculatedAmount } = this.state;
-    const { transactionNameError, amountError, rateError } = this.state;
+    const {
+      transactionName,
+      amount,
+      rate,
+      calculatedAmount,
+      transactionNameError,
+      amountError,
+      rateError,
+      rateFetchingError
+    } = this.state;
     return (
       <Paper className="new-transaction-container">
         <TextField
@@ -96,19 +134,30 @@ class NewTransaction extends PureComponent {
           helperText={transactionNameError}
         />
         <div className="new-transaction-currency-rate">
-          1EUR =
-          <TextField
-            className="new-transaction-currency-rate-input"
-            onChange={this.handleChangeRate}
-            onKeyDown={this.handleKeyDownRate}
-            type="number"
-            margin="normal"
-            value={rate}
-            InputProps={{ inputProps: { min: 0 } }}
-            error={rateError !== ""}
-            helperText={rateError}
-          />
-          PLN
+          <div className="new-transaction-currency-rate-input-container">
+            1EUR =
+            <TextField
+              className="new-transaction-currency-rate-input"
+              onChange={this.handleChangeRate}
+              onKeyDown={this.handleKeyDownRate}
+              type="number"
+              margin="normal"
+              value={rate}
+              InputProps={{ inputProps: { min: 0 } }}
+              error={rateError !== ""}
+              helperText={rateError}
+            />
+            PLN
+          </div>
+          <Button
+            className="rate-button"
+            variant="outlined"
+            color="primary"
+            size="small"
+            onClick={this.handleFetchRate}
+          >
+            Get current rate
+          </Button>
         </div>
         <TextField
           label="Amount in Euro"
@@ -130,6 +179,12 @@ class NewTransaction extends PureComponent {
             Submit
           </Button>
         </div>
+        {rateFetchingError !== "" ? (
+          <ErrorSnackbar
+            handleCloseError={this.handleCloseErrorSnackBar}
+            error={rateFetchingError}
+          />
+        ) : null}
       </Paper>
     );
   }
