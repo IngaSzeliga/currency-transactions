@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Transaction component expects component to never be changed 1`] = `
+<WithStyles(ForwardRef(Paper))
+  className="transaction-container"
+>
+  <div>
+    <CachedIcon
+      fontSize="large"
+    />
+  </div>
+  <div
+    className="transaction-container-title"
+  >
+    some-title
+  </div>
+  <div
+    className="transaction-container-amounts"
+  >
+    <div
+      className="transaction-container-amounts-amount"
+    >
+      € 12.00
+    </div>
+    <div
+      className="transaction-container-amounts-converted-amount"
+    >
+      12,33
+    </div>
+  </div>
+  <WithStyles(ForwardRef(Fab))
+    aria-label="delete"
+    className="transaction-container-delete-button"
+    color="secondary"
+    onClick={[Function]}
+    size="small"
+  >
+    <DeleteIcon />
+  </WithStyles(ForwardRef(Fab))>
+</WithStyles(ForwardRef(Paper))>
+`;
