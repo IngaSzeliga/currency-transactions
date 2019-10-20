@@ -2,7 +2,7 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import uuidv4 from "uuid/v4";
 import { Paper, TextField, Button } from "@material-ui/core";
-import { E_KEYCODE } from "../../config";
+import { E_KEYCODE, errorMessage } from "../../config";
 import "./NewTransaction.scss";
 
 class NewTransaction extends PureComponent {
@@ -10,7 +10,10 @@ class NewTransaction extends PureComponent {
     transactionName: "",
     amount: "",
     rate: "",
-    calculatedAmount: ""
+    calculatedAmount: "",
+    transactionNameError: "",
+    amountError: "",
+    rateError: ""
   };
 
   calculateAmount = (amount, rate) => amount * rate;
@@ -40,24 +43,47 @@ class NewTransaction extends PureComponent {
   };
 
   handleSubmit = () => {
-    const { addTransaction } = this.props;
-    const { transactionName, amount, calculatedAmount } = this.state;
-    addTransaction({
-      id: uuidv4(),
-      title: transactionName,
-      amount: amount,
-      convertedAmount: calculatedAmount
-    });
-    this.setState({
-      transactionName: "",
-      amount: "",
-      rate: "",
-      calculatedAmount: ""
-    });
+    const { transactionName, amount, calculatedAmount, rate } = this.state;
+    const stateError = {
+      transactionNameError: "",
+      amountError: "",
+      rateError: ""
+    };
+    let hasError = false;
+    if (transactionName === "") {
+      stateError.transactionNameError = errorMessage;
+      hasError = true;
+    }
+    if (amount === "") {
+      stateError.amountError = errorMessage;
+      hasError = true;
+    }
+    if (rate === "") {
+      stateError.rateError = errorMessage;
+      hasError = true;
+    }
+    if (hasError) {
+      this.setState(stateError);
+    } else {
+      const { addTransaction } = this.props;
+      addTransaction({
+        id: uuidv4(),
+        title: transactionName,
+        amount: amount,
+        convertedAmount: calculatedAmount
+      });
+      this.setState({
+        transactionName: "",
+        amount: "",
+        rate: "",
+        calculatedAmount: ""
+      });
+    }
   };
 
   render() {
     const { transactionName, amount, rate, calculatedAmount } = this.state;
+    const { transactionNameError, amountError, rateError } = this.state;
     return (
       <Paper className="new-transaction-container">
         <TextField
@@ -66,6 +92,8 @@ class NewTransaction extends PureComponent {
           type="text"
           margin="normal"
           value={transactionName}
+          error={transactionNameError !== ""}
+          helperText={transactionNameError}
         />
         <div className="new-transaction-currency-rate">
           1EUR =
@@ -77,6 +105,8 @@ class NewTransaction extends PureComponent {
             margin="normal"
             value={rate}
             InputProps={{ inputProps: { min: 0 } }}
+            error={rateError !== ""}
+            helperText={rateError}
           />
           PLN
         </div>
@@ -86,6 +116,8 @@ class NewTransaction extends PureComponent {
           type="number"
           margin="normal"
           value={amount}
+          error={amountError !== ""}
+          helperText={amountError}
         />
         <div>Amount in PLN: {calculatedAmount}</div>
         <div className="new-transaction-button-container">
