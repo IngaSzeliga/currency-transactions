@@ -35,7 +35,10 @@ class NewTransaction extends PureComponent {
   handleChangeRate = event => {
     const { amount } = this.state;
     const rate = Number(event.target.value);
-    const calculatedAmount = this.calculateAmount(amount, rate);
+    let calculatedAmount = "";
+    if (amount !== "") {
+      calculatedAmount = this.calculateAmount(amount, rate);
+    }
     this.setState({ rate, calculatedAmount });
   };
 
@@ -48,7 +51,10 @@ class NewTransaction extends PureComponent {
   handleChangeAmount = event => {
     const { rate } = this.state;
     const amount = Number(event.target.value);
-    const calculatedAmount = this.calculateAmount(amount, rate);
+    let calculatedAmount = "";
+    if (rate !== "") {
+      calculatedAmount = this.calculateAmount(amount, rate);
+    }
     this.setState({ amount, calculatedAmount });
   };
 
@@ -60,7 +66,12 @@ class NewTransaction extends PureComponent {
       .then(({ data }) => {
         const { rates } = data;
         const { PLN: rate } = rates;
-        this.setState({ rate });
+        const { amount } = this.state;
+        let calculatedAmount = "";
+        if (amount !== "") {
+          calculatedAmount = this.calculateAmount(amount, rate);
+        }
+        this.setState({ rate, calculatedAmount });
       })
       .catch(error => {
         this.setState({ rateFetchingError: errorMessageFetching });
