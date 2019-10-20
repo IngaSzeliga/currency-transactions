@@ -65,7 +65,7 @@ exports[`NewTransaction component expects component to never be changed 1`] = `
     <div
       className="new-transaction-exchange-amount-container"
     >
-      Amount in PLN: 
+      Amount in PLN:
     </div>
     <div
       className="new-transaction-button-container"

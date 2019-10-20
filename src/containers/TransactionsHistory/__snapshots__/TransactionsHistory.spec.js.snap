@@ -9,6 +9,7 @@ exports[`TransactionsHistory component expects component to never be changed 1`]
   >
     Transaction History:
   </h2>
+  Sum of transactions: 054,99 zł
   <Memo(Transaction)
     amount={13}
     convertedAmount="54,99 zł"

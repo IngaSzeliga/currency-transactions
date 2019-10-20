@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { Paper, Fab } from "@material-ui/core";
 import CachedIcon from "@material-ui/icons/Cached";
 import DeleteIcon from "@material-ui/icons/Delete";
-import { countryRegion, EUR_NAME } from "../../config";
+import { countryRegion, EUR_NAME, PLN_NAME } from "../../config";
 import "./Transaction.scss";
 
 const Transaction = props => {
@@ -12,6 +12,13 @@ const Transaction = props => {
     style: "currency",
     currency: EUR_NAME
   });
+  const convertedAmountFormatted = convertedAmount.toLocaleString(
+    countryRegion,
+    {
+      style: "currency",
+      currency: PLN_NAME
+    }
+  );
   return (
     <Paper className="transaction-container">
       <div>
@@ -23,7 +30,7 @@ const Transaction = props => {
           {amountFormatted}
         </div>
         <div className="transaction-container-amounts-converted-amount">
-          {convertedAmount}
+          {convertedAmountFormatted}
         </div>
       </div>
       <Fab
@@ -43,7 +50,7 @@ Transaction.propTypes = {
   id: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   amount: PropTypes.number.isRequired,
-  convertedAmount: PropTypes.string.isRequired,
+  convertedAmount: PropTypes.number.isRequired,
   deleteTransaction: PropTypes.func.isRequired
 };
 

@@ -9,7 +9,7 @@ describe("Transaction component", () => {
       id="some-id"
       title="some-title"
       amount={12}
-      convertedAmount="12,33"
+      convertedAmount={12.33}
       deleteTransaction={jest.fn()}
     />
   );
@@ -29,7 +29,7 @@ describe("Transaction component", () => {
         id="some-id"
         title="some-title"
         amount={12}
-        convertedAmount="12,33"
+        convertedAmount={12.33}
         deleteTransaction={mockFunction}
       />
     );

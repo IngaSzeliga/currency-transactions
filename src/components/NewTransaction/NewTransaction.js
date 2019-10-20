@@ -29,11 +29,7 @@ class NewTransaction extends PureComponent {
     rateFetchingError: ""
   };
 
-  calculateAmount = (amount, rate) =>
-    Number(amount * rate).toLocaleString(countryRegion, {
-      style: "currency",
-      currency: PLN_NAME
-    });
+  calculateAmount = (amount, rate) => amount * rate;
 
   handleTransactionName = event => {
     this.setState({ transactionName: event.target.value });
@@ -192,7 +188,13 @@ class NewTransaction extends PureComponent {
             helperText={amountError}
           />
           <div className="new-transaction-exchange-amount-container">
-            Amount in PLN: {calculatedAmount}
+            Amount in PLN:
+            {calculatedAmount !== ""
+              ? Number(calculatedAmount).toLocaleString(countryRegion, {
+                  style: "currency",
+                  currency: PLN_NAME
+                })
+              : null}
           </div>
           <div className="new-transaction-button-container">
             <Button

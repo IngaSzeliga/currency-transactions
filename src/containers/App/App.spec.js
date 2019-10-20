@@ -21,7 +21,7 @@ describe("App component", () => {
           id: "2caf5711-2913-4e41-95db-088625acf1bf",
           title: "Name",
           amount: 13,
-          convertedAmount: "54,99 zł"
+          convertedAmount: 54.99
         }
       ]
     });
@@ -37,7 +37,7 @@ describe("App component", () => {
       id: "2caf5711-2913-4e41-95db-088625acf1bf",
       title: "Name",
       amount: 13,
-      convertedAmount: "54,99 zł"
+      convertedAmount: 54.99
     };
     componentMounted.instance().addTransaction(transaction);
     expect(componentMounted.state("transactions")).toEqual([transaction]);
