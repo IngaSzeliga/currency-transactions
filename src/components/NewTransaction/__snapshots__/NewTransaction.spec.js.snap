@@ -1,0 +1,84 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NewTransaction component expects component to never be changed 1`] = `
+<div
+  className="new-transaction-container"
+>
+  <WithStyles(ForwardRef(Paper))
+    className="new-transaction-container-paper"
+  >
+    <WithStyles(ForwardRef(TextField))
+      error={false}
+      helperText=""
+      label="Transaction Name"
+      margin="normal"
+      onChange={[Function]}
+      type="text"
+      value=""
+    />
+    <div
+      className="new-transaction-currency-rate"
+    >
+      <div
+        className="new-transaction-currency-rate-input-container"
+      >
+        1EUR =
+        <WithStyles(ForwardRef(TextField))
+          InputProps={
+            Object {
+              "inputProps": Object {
+                "min": 0,
+              },
+            }
+          }
+          className="new-transaction-currency-rate-input"
+          error={false}
+          helperText=""
+          margin="normal"
+          onChange={[Function]}
+          onKeyDown={[Function]}
+          type="number"
+          value=""
+        />
+         PLN
+      </div>
+      <WithStyles(ForwardRef(Button))
+        className="rate-button"
+        color="primary"
+        onClick={[Function]}
+        size="small"
+        variant="outlined"
+      >
+        Get current rate
+      </WithStyles(ForwardRef(Button))>
+    </div>
+    <WithStyles(ForwardRef(TextField))
+      error={false}
+      helperText=""
+      label="Amount in Euro"
+      margin="normal"
+      onChange={[Function]}
+      onKeyDown={[Function]}
+      type="number"
+      value=""
+    />
+    <div
+      className="new-transaction-exchange-amount-container"
+    >
+      Amount in PLN: 
+    </div>
+    <div
+      className="new-transaction-button-container"
+    >
+      <WithStyles(ForwardRef(Button))
+        className="new-transaction-button"
+        color="primary"
+        onClick={[Function]}
+        variant="contained"
+      >
+        Submit
+      </WithStyles(ForwardRef(Button))>
+    </div>
+  </WithStyles(ForwardRef(Paper))>
+</div>
+`;
