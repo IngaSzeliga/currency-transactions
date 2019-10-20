@@ -5,7 +5,7 @@
   flex-direction: column;
   padding: 40px;
   @media only screen and (min-width: $tablet) {
-    width: 80%;
+    width: 40%;
   }
 
   .new-transaction-currency-rate {
@@ -25,6 +25,11 @@
     .rate-button {
       margin-left: 10px;
     }
+  }
+  .new-transaction-exchange-amount-container {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   .new-transaction-button-container {
     display: flex;

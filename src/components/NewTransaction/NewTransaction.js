@@ -192,7 +192,9 @@ class NewTransaction extends PureComponent {
           error={amountError !== ""}
           helperText={amountError}
         />
-        <div>Amount in PLN: {calculatedAmount}</div>
+        <div className="new-transaction-exchange-amount-container">
+          Amount in PLN: {calculatedAmount}
+        </div>
         <div className="new-transaction-button-container">
           <Button
             className="new-transaction-button"
